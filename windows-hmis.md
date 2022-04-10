@@ -131,20 +131,38 @@ Run regedit to open the Registry Editor. navigate to the following registry key:
 
 ## Restrict access to registry editing tools
 Regedit.exe and Reg.exe are blocked (reg query ...)
+
+
+**Via Registry:**
+`HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System`
+
+-> set "DisableRegistryTools" to "1". If the Value doesn't exist, create a new 32-bit DWORD value *DisableRegistryTools* (Even on 64-bit systems)
+
+
+**Via GPO:**
 ```
 User Configuration\Administrative Templates\System\Prevent access to registry editing tools
 ```
-->
+-> Enable it
 
 
 ## Restrict access to Control panel
 Prohibit access to  Control Panel (control.exe) und PC Settings (SystemSettings.exe)
+
+**Via Registry:**
+`HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer`
+
+-> set "NoControlPanel" to "1". If the Value doesn't exist, create a new 32-bit DWORD value *NoControlPanel* (Even on 64-bit systems)
+
+**Via GPO:**
 ```
 User Configuration\Administrative Templates\Control Panel\Prohbit access to Control Panel and PC settings
 ```
 -> set to "Enabled"
 
+## Restrict access to task manager
 
+## REstrict access to mmc snap-ins
 
 # Further Hardening Settings
 
