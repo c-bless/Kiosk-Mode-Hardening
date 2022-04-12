@@ -134,17 +134,27 @@ Regedit.exe and Reg.exe are blocked (reg query ...)
 
 
 **Via Registry:**
+
 `HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System`
 
--> set "DisableRegistryTools" to "1". If the Value doesn't exist, create a new 32-bit DWORD value *DisableRegistryTools* (Even on 64-bit systems)
+-> set *DisableRegistryTools* to "1". If the Value doesn't exist, create a new 32-bit DWORD value *DisableRegistryTools* (Even on 64-bit systems)
 
+CMD command:
+```
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\System" /t Reg_dword /v DisableRegistryTools /f /d 1
+```
+
+Powershell command:
+```
+Set-ItemProperty -Path "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\System" -Name "DisableRegistryTools" -Force -Value 1`
+```
 
 **Via GPO:**
+
+Enable the following option:
 ```
 User Configuration\Administrative Templates\System\Prevent access to registry editing tools
 ```
--> Enable it
-
 
 ## Restrict access to Control panel
 Prohibit access to  Control Panel (control.exe) und PC Settings (SystemSettings.exe)
@@ -155,43 +165,69 @@ Prohibit access to  Control Panel (control.exe) und PC Settings (SystemSettings.
 -> set "NoControlPanel" to "1". If the Value doesn't exist, create a new 32-bit DWORD value *NoControlPanel* (Even on 64-bit systems)
 
 **Via GPO:**
+
+Enable the following option:
 ```
 User Configuration\Administrative Templates\Control Panel\Prohbit access to Control Panel and PC settings
 ```
--> set to "Enabled"
 
 ## Restrict access to task manager
 
-## REstrict access to mmc snap-ins
+**Via GPO:**
 
-# Further Hardening Settings
-
-## Start menu and task bar
-**Disable Context menu (right click)**
+Enable the following option:
 ```
-User Configuration\Administrative Templates\Start Menu and Taskbar\Disable context menus in the Start Menu
+User Configuration\Administrative Templates\System\Ctr+Alt+Del Options\Remove Task Manager
 ```
--> set to "Enabled"
 
-....
+## Restrict access to mmc snap-ins
 
-
-## File explorer
-**Access to local drives**
+Settings for restricting access to Management Console snap-ins can be found at the following location:
 ```
-User Configuration\Administrative Templates\File Explorer\Prevent access to drives from My Computer
+User Configuration\Administrative Templates\Windows Components\Microsoft Management Console\Restricted/Permitted snap-ins\
 ```
--> set to "Enabled"
 
-....
+| Policy | Setting | Description |
+| ----------- | ----------- | ----------- |
+| *Active Directory Domains and Trusts* | Disabled |  |
+| *Active Directory Sites and Services* | Disabled |  |
+| *Active Directory Users and Computers* | Disabled |  |
+| *Certificates* | Disabled |  |
+| *Computer Management* | Disabled |  |
+| *Component Services* | Disabled |  |
+| *Device Manager* | Disabled |  |
+| *Event Viewer* | Disabled |  |
+| *Services* | Disabled |  |
+| *Shared Folders* | Disabled |  |
+| ...[TBD]... | Disabled |  |
 
-**Remove File menu from File Explorer**
+
+# Further hardening settings of Windows components
+
+## GPO Settings for Start menu and task bar
+
+Settings for restricting options in the start menu and task bar can be found at the following location:
 ```
-User Configuration\Administrative Templates\File Explorer\Remove File menu from File Explorer
+User Configuration\Administrative Templates\Start Menu and Taskbar\
 ```
--> set to "Enabled"
+
+| Policy | Setting | Description |
+| ----------- | ----------- | ----------- |
+| *Disable context menus in the Start Menu* | Enabled | Disable Context menu (right click) |
+| ...[TBD]... | | |
 
 
 
 
-...
+## GPO Settings for hardening the file explorer
+
+Settings for restricting the Windows file explorer can be found at the following location:
+```
+User Configuration\Administrative Templates\File Explorer\
+```
+
+| Policy | Setting | Description |
+| ----------- | ----------- | ----------- |
+| *Prevent access to drives from My Computer* | Enabled | Prevent access to local drives in the file explorer |
+| *Remove File menu from File Explorer* | | Remove File menu from File Explorer |
+| ...[TBD]... | | |
