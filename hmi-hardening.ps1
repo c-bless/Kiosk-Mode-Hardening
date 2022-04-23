@@ -47,6 +47,9 @@ function invoke-disablehotkeys {
    # Disable Toggle Keys
    Set-ItemProperty -Path "HKCU:\Control Panel\Accessibility\ToggleKeys\" -Name "Flags" -Value "58"
 
+   # Disable Mouse Keys
+   Set-ItemProperty -Path "HKCU:\Control Panel\Accessibility\MouseKeys\" -Name "Flags" -Value "59"
+
    # Disable Windows Keys
    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\" -Name "NoWinKeys" -Value 0x1
  }
