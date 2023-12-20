@@ -2,7 +2,7 @@
 
 This Project has been created to collect several hardening settings for HMIs. Those settings including various ways how to configure them can be found under the following link:
 
-* [General Hardening Settings for Windows HMIs](https://bitbucket.org/cbless/kiosk-mode-hardening/wiki/windows-hmis.md)
+* [General Hardening Settings for Windows HMIs](https://github.com/c-bless/Kiosk-Mode-Hardening/wiki)
 
 Some of those settings have been prepared as PowerShell script that can be used to configure them locally on an HMI. The script is licensed under the GNU General Public License in version 3. See http://www.gnu.org/licenses/ for further details.
 
